@@ -12,10 +12,11 @@ import (
 
 var databaseConnection *sql.DB
 
+// Product coemntario
 type Product struct {
-	ID           int    `json:"id"`
-	Product_Code string `json:"product_code"`
-	Description  string `json:"description"`
+	ID          int    `json:"id"`
+	ProductCode string `json:"product_code"`
+	Description string `json:"description"`
 }
 
 func catch(err error) {
@@ -58,7 +59,7 @@ func UpdateProducto(w http.ResponseWriter, r *http.Request) {
 
 	query, err := databaseConnection.Prepare("Update products set product_code=?, description=? where id=?")
 	catch(err)
-	_, er := query.Exec(product.Product_Code, product.Description, id)
+	_, er := query.Exec(product.ProductCode, product.Description, id)
 	catch(er)
 
 	defer query.Close()
@@ -75,7 +76,7 @@ func CreateProducto(w http.ResponseWriter, r *http.Request) {
 	query, err := databaseConnection.Prepare("Insert products SET product_code=?, description=?")
 	catch(err)
 
-	_, er := query.Exec(producto.Product_Code, producto.Description)
+	_, er := query.Exec(producto.ProductCode, producto.Description)
 	catch(er)
 	defer query.Close()
 
@@ -92,7 +93,7 @@ func AllProductos(w http.ResponseWriter, r *http.Request) {
 
 	for results.Next() {
 		product := &Product{}
-		err = results.Scan(&product.ID, &product.Product_Code, &product.Description)
+		err = results.Scan(&product.ID, &product.ProductCode, &product.Description)
 
 		catch(err)
 		products = append(products, product)
