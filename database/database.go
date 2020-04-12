@@ -2,9 +2,8 @@ package database
 
 import "database/sql"
 
-// InitDB comentario
 func InitDB() *sql.DB {
-	dbConnection, err := sql.Open("mysql", "root:HOLAcomoestas88--@/northwind")
+	dbConnection, err := sql.Open("mysql", "root:HOLAcomoestas88--@/nortwind")
 	if err != nil {
 		panic(err.Error())
 	}
