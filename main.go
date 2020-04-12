@@ -1,15 +1,19 @@
 package main
 
 import (
-	"net/http"
+	"RestGoChi/database"
+	"fmt"
 
-	"github.com/go-chi/chi"
+	// "net/http"
+
+	// "github.com/go-chi/chi"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 func main() {
-	r := chi.NewRouter()
-	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("welcome"))
-	})
-	http.ListenAndServe(":3000", r)
+	dbConnection := database.InitDB()
+	defer dbConnection.Close()
+
+	fmt.Println(dbConnection)
+
 }
